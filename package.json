@@ -1,6 +1,6 @@
 {
   "name": "windscribe-slider-captcha",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fast and accurate Windscribe slider captcha solver using OpenCV template matching",
   "main": "index.js",
   "type": "module",
@@ -27,4 +27,3 @@
     "url": "https://github.com/sunlightx/windscribe-captcha-solver.git"
   }
 }
-
