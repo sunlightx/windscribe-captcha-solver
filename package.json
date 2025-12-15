@@ -1,0 +1,30 @@
+{
+  "name": "windscribe-slider-captcha",
+  "version": "1.0.0",
+  "description": "Fast and accurate Windscribe slider captcha solver using OpenCV template matching",
+  "main": "index.js",
+  "type": "module",
+  "keywords": [
+    "windscribe",
+    "captcha",
+    "slider",
+    "puzzle",
+    "opencv",
+    "solver",
+    "geetest"
+  ],
+  "author": "sunlightx",
+  "license": "MIT",
+  "dependencies": {
+    "opencv-wasm": "^4.8.1-1",
+    "sharp": "^0.33.5"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sunlightx/windscribe-captcha-solver.git"
+  }
+}
+
