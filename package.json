@@ -1,6 +1,6 @@
 {
   "name": "windscribe-slider-captcha",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Fast and accurate Windscribe slider captcha solver using OpenCV template matching",
   "main": "index.js",
   "type": "module",
