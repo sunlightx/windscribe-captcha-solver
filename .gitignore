@@ -13,4 +13,4 @@ result.png
 *.swp
 *.swo
 *~
-
+.gitignore
