@@ -10,42 +10,53 @@ class PuzzleSolver {
   async imageToMat(imageInput) {
     let imageBuffer;
 
-    if (typeof imageInput === 'string') {
-      if (imageInput.startsWith('data:image') || imageInput.startsWith('base64,')) {
-        const base64Data = imageInput.includes(',')
-          ? imageInput.split(',')[1]
-          : imageInput.replace(/^base64,/, '');
-        imageBuffer = Buffer.from(base64Data, 'base64');
+    try {
+      if (typeof imageInput === 'string') {
+        if (imageInput.startsWith('data:image') || imageInput.match(/^[A-Za-z0-9+/=]+$/)) {
+          const base64Data = imageInput.includes(',')
+            ? imageInput.split(',')[1]
+            : imageInput;
+          imageBuffer = Buffer.from(base64Data, 'base64');
+        } else {
+          const sharpInstance = sharp(imageInput);
+          const buffer = await sharpInstance
+            .ensureAlpha()
+            .raw()
+            .toBuffer({ resolveWithObject: true });
+
+          return cv.matFromArray(
+            buffer.info.height,
+            buffer.info.width,
+            cv.CV_8UC4,
+            new Uint8Array(buffer.data)
+          );
+        }
+      } else if (Buffer.isBuffer(imageInput)) {
+        imageBuffer = imageInput;
       } else {
-        imageBuffer = await sharp(imageInput)
-          .ensureAlpha()
-          .raw()
-          .toBuffer({ resolveWithObject: true });
-
-        return cv.matFromArray(
-          imageBuffer.info.height,
-          imageBuffer.info.width,
-          cv.CV_8UC4,
-          new Uint8Array(imageBuffer.data)
-        );
+        throw new Error('Invalid image input. Expected file path, base64 string, or Buffer');
       }
-    } else if (Buffer.isBuffer(imageInput)) {
-      imageBuffer = imageInput;
-    } else {
-      throw new Error('Invalid image input. Expected file path, base64 string, or Buffer');
+
+      if (!imageBuffer || imageBuffer.length === 0) {
+        throw new Error('Invalid image data: empty buffer');
+      }
+
+      const sharpInstance = sharp(imageBuffer);
+
+      const buffer = await sharpInstance
+        .ensureAlpha()
+        .raw()
+        .toBuffer({ resolveWithObject: true });
+
+      return cv.matFromArray(
+        buffer.info.height,
+        buffer.info.width,
+        cv.CV_8UC4,
+        new Uint8Array(buffer.data)
+      );
+    } catch (error) {
+      throw error;
     }
-
-    const buffer = await sharp(imageBuffer)
-      .ensureAlpha()
-      .raw()
-      .toBuffer({ resolveWithObject: true });
-
-    return cv.matFromArray(
-      buffer.info.height,
-      buffer.info.width,
-      cv.CV_8UC4,
-      new Uint8Array(buffer.data)
-    );
   }
 
   async findPuzzlePosition() {
