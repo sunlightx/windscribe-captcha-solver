@@ -1,12 +1,6 @@
 node_modules/
 *.log
 .DS_Store
-captcha/
-results/
-result.png
-*.png
-*.jpg
-*.jpeg
 .env
 .vscode/
 .idea/
