@@ -1,3 +1,6 @@
+<img width="700" height="400" alt="2_result" src="https://github.com/user-attachments/assets/7f03a44f-4224-4f00-a493-5345690b0024" />
+<img width="700" height="400" alt="23_result" src="https://github.com/user-attachments/assets/351f15a3-d16a-45b3-aa64-79a515ea67ec" />
+
 # Windscribe Slider Captcha Solver
 
 Fast and accurate Windscribe slider captcha solver using OpenCV template matching.
